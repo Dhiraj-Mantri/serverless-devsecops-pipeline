@@ -2,3 +2,6 @@
 *.tfstate*
 *.zip
 .env
+.venv/
+__pycache__/
+.pytest_cache/
