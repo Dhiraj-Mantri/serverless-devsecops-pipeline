@@ -48,3 +48,21 @@ jobs:
           terraform init -backend=false
           terraform validate
         working-directory: terraform/envs
+
+
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code download karo
+        uses: actions/checkout@v4
+
+      - name: Python 3.12 lagao
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: pip-audit chalao
+        run: |
+          pip install pip-audit
+          pip-audit -r src/requirements.txt
