@@ -25,3 +25,26 @@ jobs:
 
       - name: Tests chalao
         run: pytest -v
+
+
+
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code download karo
+        uses: actions/checkout@v4
+
+      - name: Terraform lagao
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.12.2"
+
+      - name: Format check
+        run: terraform fmt -check -recursive
+        working-directory: terraform
+
+      - name: Validate (envs)
+        run: |
+          terraform init -backend=false
+          terraform validate
+        working-directory: terraform/envs
