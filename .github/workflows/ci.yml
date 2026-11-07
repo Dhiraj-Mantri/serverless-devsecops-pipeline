@@ -66,3 +66,9 @@ jobs:
         run: |
           pip install pip-audit
           pip-audit -r src/requirements.txt
+
+
+      - name: Checkov chalao (Terraform security scan)
+        run: |
+          pip install checkov
+          checkov --config-file .checkov.yaml

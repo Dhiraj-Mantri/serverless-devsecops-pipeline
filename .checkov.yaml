@@ -1,0 +1,30 @@
+framework:
+  - terraform
+directory:
+  - terraform
+compact: true
+quiet: true
+
+skip-check:
+  # Authorization: API abhi demo ke liye public hai. Future: JWT/IAM authorizer
+  - CKV_AWS_309
+  # KMS customer-managed keys: AWS-managed encryption on hai, CMK ka kharcha aur complexity
+  - CKV_AWS_119
+  - CKV_AWS_158
+  - CKV_AWS_145
+  - CKV_AWS_173
+  # Lambda VPC: NAT Gateway (~$32/month) chahiye hoga, DynamoDB public endpoint par TLS se safe
+  - CKV_AWS_117
+  # Code signing: is scale par overkill
+  - CKV_AWS_272
+  # DLQ: API Gateway se synchronous call hai, DLQ async ke liye hota hai
+  - CKV_AWS_116
+  # X-Ray tracing: baad me add karenge
+  - CKV_AWS_50
+  # Log retention 1 saal: 14 din jaan-boojhkar (cost)
+  - CKV_AWS_338
+  # State bucket (bootstrap): replication, logging, lifecycle, notifications overkill
+  - CKV2_AWS_62
+  - CKV_AWS_144
+  - CKV2_AWS_61
+  - CKV_AWS_18
