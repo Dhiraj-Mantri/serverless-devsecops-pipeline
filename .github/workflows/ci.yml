@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code download karo
+        uses: actions/checkout@v4
+
+      - name: Python 3.12 lagao
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dependencies install karo
+        run: pip install pytest boto3
+
+      - name: Tests chalao
+        run: pytest -v
