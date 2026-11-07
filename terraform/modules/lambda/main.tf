@@ -79,6 +79,7 @@ resource "aws_lambda_function" "this" {
   source_code_hash = data.archive_file.zip.output_base64sha256
   timeout          = 10
   memory_size      = 128
+  # checkov:skip=CKV_AWS_115:Account concurrency quota is 10; AWS requires 10 unreserved, so no reservation possible. API Gateway throttling limits load instead.
 
   environment {
     variables = {

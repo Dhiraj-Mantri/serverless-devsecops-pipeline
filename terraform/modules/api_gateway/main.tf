@@ -1,3 +1,10 @@
+# API ke access logs ke liye alag log group
+resource "aws_cloudwatch_log_group" "access" {
+  name              = "/aws/apigateway/${var.api_name}"
+  retention_in_days = 14
+  tags              = var.tags
+}
+
 # API khud (HTTP type)
 resource "aws_apigatewayv2_api" "this" {
   name          = var.api_name
@@ -10,6 +17,16 @@ resource "aws_apigatewayv2_stage" "default" {
   api_id      = aws_apigatewayv2_api.this.id
   name        = "$default"
   auto_deploy = true
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.access.arn
+    format = jsonencode({
+      requestId = "$context.requestId"
+      ip        = "$context.identity.sourceIp"
+      time      = "$context.requestTime"
+      route     = "$context.routeKey"
+      status    = "$context.status"
+    })
+  }
 
   default_route_settings {
     throttling_burst_limit = 20
