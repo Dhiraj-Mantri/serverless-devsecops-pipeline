@@ -82,7 +82,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Trivy scan (vulnerabilities, secrets, misconfig)
-        uses: aquasecurity/trivy-action@<sahi-tag>
+        uses: aquasecurity/trivy-action@v0.33.1
         with:
           scan-type: fs
           scan-ref: .
