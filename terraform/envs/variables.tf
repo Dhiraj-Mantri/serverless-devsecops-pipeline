@@ -12,3 +12,8 @@ variable "environment" {
     error_message = "environment must be dev or prod."
   }
 }
+
+variable "alert_email" {
+  type        = string
+  description = "Email address for CloudWatch alarm notifications"
+}

@@ -30,3 +30,12 @@ module "api_gateway" {
   lambda_function_name = module.lambda.function_name
   tags                 = local.tags
 }
+
+module "monitoring" {
+  source               = "../modules/monitoring"
+  name                 = local.name
+  lambda_function_name = module.lambda.function_name
+  api_id               = module.api_gateway.api_id
+  alert_email          = var.alert_email
+  tags                 = local.tags
+}
