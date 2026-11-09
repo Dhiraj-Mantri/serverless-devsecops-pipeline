@@ -28,3 +28,5 @@ skip-check:
   - CKV_AWS_144
   - CKV2_AWS_61
   - CKV_AWS_18
+  # SNS encryption: AWS-managed key CloudWatch alarms ko publish nahi karne deti; CMK baad me
+  - CKV_AWS_26
