@@ -41,4 +41,5 @@ The account concurrency quota is small (10), so a traffic spike can cause this.
 ## After the incident
 
 - Add the issue and fix to `docs/problems-solved.md`.
-- Test alerting again: `aws cloudwatch set-alarm-state --alarm-name <name> --state-value ALARM --state-reason test`
+- Test alerting again:
+  `aws cloudwatch set-alarm-state --alarm-name <name> --state-value ALARM --state-reason test`
