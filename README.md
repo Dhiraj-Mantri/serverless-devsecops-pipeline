@@ -59,3 +59,22 @@ Confirm the SNS subscription email to receive alerts.
 ## Estimated monthly cost
 
 Roughly zero for low traffic: Lambda, API Gateway and DynamoDB are pay-per-use, alarms and SNS email are within the free tier. Log storage costs a few cents.
+
+
+
+## Known limitations
+
+- **No automated deployment from CI yet.** The GitHub OIDC role is fully defined in `terraform/github_oidc` but could not be applied: an organization-level Service Control Policy on my AWS Free plan account denies `iam:CreateOpenIDConnectProvider`. CI therefore runs tests, `terraform fmt`/`validate` and security scans without AWS credentials. Deployment is done locally with Terraform.
+- **The API is public (no authorization).** Acceptable for a demo; throttling limits abuse. Checkov rule `CKV_AWS_309` is skipped on purpose.
+- **Trivy version is not pinned** (`version: latest`), so scan results may change over time.
+- **SNS topic is not encrypted**, because the AWS-managed key does not let CloudWatch alarms publish. A customer-managed key with the right policy would fix this.
+- **`scan` is used to list items** (limited to 50). Fine for a demo; production should use a query with pagination.
+
+## Future improvements
+
+- Apply the OIDC role in a standalone AWS account, then add `terraform plan` as a pull request comment and deploy on merge to `main`.
+- Add a JWT or IAM authorizer to the API.
+- Add dev/prod workspaces and ephemeral preview environments per pull request.
+- Pin the Trivy and Checkov versions.
+- Add a permissions boundary for the CI role, and a customer-managed KMS key for SNS.
+
