@@ -32,3 +32,8 @@ A log of real issues I hit while building this project, with the cause and the f
 ## 7. Trivy flagged the state bucket (AWS-0132, HIGH)
 - **Cause:** The Terraform state bucket uses AWS-managed encryption (AES256) instead of a customer-managed KMS key.
 - **Fix:** Documented the decision in `.trivyignore`. A customer-managed key adds cost and key-policy overhead that is not justified for this project. The bucket is still encrypted, versioned, and blocks all public access.
+
+## 8. CI went red after adding the monitoring module
+- **Symptom:** The `security` and `trivy` jobs failed on every push after the SNS topic was added.
+- **Cause:** The new SNS topic is not encrypted (the AWS-managed key does not let CloudWatch alarms publish). Checkov flagged `CKV_AWS_26`, and Trivy flagged the same issue.
+- **Fix:** Documented both as deliberate skips with reasons (`.checkov.yaml`, `.trivyignore`), and pinned the Checkov version so CI matches my laptop. A customer-managed KMS key is listed as a future improvement.
