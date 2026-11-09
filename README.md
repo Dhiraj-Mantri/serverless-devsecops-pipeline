@@ -33,7 +33,7 @@ flowchart LR
 - **Input validation** in the handler returns 400 on bad input.
 - **Encryption and recovery:** DynamoDB server-side encryption and point-in-time recovery; state bucket is versioned, encrypted and blocks public access.
 - **Cost and abuse protection:** API throttling (10 req/s, burst 20), 14-day log retention, small Lambda memory and timeout.
-- **Pipeline gates:** pip-audit, Checkov (122 passed, 0 failed) and Trivy (no secrets or vulnerabilities found) run on every push.
+- **Pipeline gates:** pip-audit, Checkov (125 passed, 0 failed) and Trivy (no secrets or vulnerabilities found) run on every push.
 - **Documented skips:** every skipped check has a written reason in `.checkov.yaml` and `.trivyignore` (for example customer-managed KMS keys, VPC for Lambda, code signing).
 
 ## How to deploy
