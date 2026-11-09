@@ -70,7 +70,7 @@ jobs:
 
       - name: Checkov chalao (Terraform security scan)
         run: |
-          pip install checkov
+          pip install checkov==3.4.3
           checkov --config-file .checkov.yaml
 
 

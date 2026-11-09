@@ -1,3 +1,7 @@
 # AWS-0132: state bucket AES256 (AWS-managed key) se encrypted hai.
 # Customer-managed KMS key ka kharcha aur complexity is project ke liye overkill.
 AWS-0132
+
+# AWS-0095: SNS topic is not encrypted. The AWS-managed key does not let
+# CloudWatch alarms publish; a customer-managed key is a future improvement.
+AWS-0095
